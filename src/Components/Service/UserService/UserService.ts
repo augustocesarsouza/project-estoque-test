@@ -57,7 +57,13 @@ class UserService {
 
   async create(user: User): Promise<ReturnGetUser | null> {
     try {
-      const response = await this.http.post<ReturnGetUser>(`/public/user/create`, user);
+      const response = await this.http.post<ReturnGetUser>(`/public/user/create`, user, {
+        headers: {
+          // Authorization: `Bearer ${token}`,
+          // uid: userId,
+          'Content-Type': 'application/json',
+        },
+      });
       
       return response.data;
     } catch(err) {
