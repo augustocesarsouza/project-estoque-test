@@ -1,16 +1,20 @@
 import * as Styled from "./styled";
 import userService from "../../Components/Service/UserService/UserService";
 import { User } from "../../Components/Interfaces/Entity/User.";
+import { useRef } from "react";
 
 const Home = () => {
+  const inputTextIdRef = useRef<HTMLInputElement | null>(null);
+
   const onClickCount = async () => {
     ///
   };
 
   const onClickGetUser = async () => {
-    const userId = "8f92f258-0d5a-4855-9c5b-e2633de33e82";
+    const input = inputTextIdRef.current as HTMLInputElement;
+    const userId = input.value;
+
     const resp = await userService.getByIdInfoUser(userId);
-    console.log(resp);
 
     if (resp && resp.isSucess) {
       const user = resp.data as User;
@@ -19,8 +23,12 @@ const Home = () => {
   };
 
   const onClickCreateAccount = async () => {
+    const input = inputTextIdRef.current as HTMLInputElement;
+    const userId = input.value;
+    console.log(userId);
+
     const user = {
-      id: "",
+      id: userId,
       name: "Augusto Cesar",
       lastName: "Souza Santana",
     };
@@ -36,6 +44,7 @@ const Home = () => {
   return (
     <Styled.ContainerMain>
       <h1>Vite React</h1>
+      <input type="text" ref={inputTextIdRef} />
       <div>
         <button onClick={onClickCount}>count is 1</button>
         <button onClick={onClickGetUser}>Pegar user</button>
