@@ -8,8 +8,9 @@ const Home = () => {
   };
 
   const onClickGetUser = async () => {
-    const userId = "581c0842-30a8-45ab-ad30-f769f7c2c965";
+    const userId = "8f92f258-0d5a-4855-9c5b-e2633de33e82";
     const resp = await userService.getByIdInfoUser(userId);
+    console.log(resp);
 
     if (resp && resp.isSucess) {
       const user = resp.data as User;
